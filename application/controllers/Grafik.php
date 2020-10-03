@@ -24,6 +24,16 @@ class Grafik extends CI_Controller
         $grafik = $this->Grafik_model->data_grafik($filtering);
         echo $data = json_encode($grafik);
     }
+    public function data_grafik_stack()
+    {
+        $get_kategori = $this->Grafik_model->get_kategori();
+        $data = [];
+        foreach ($get_kategori as $kategori) {
+            $grafik = $this->Grafik_model->data_grafik_stack($kategori->kategori);
+            array_push($data, $grafik);
+        }
+        echo $data = json_encode($data);
+    }
     private function filter()
     {
         $filter_nama = $this->input->post('filter_nama');
